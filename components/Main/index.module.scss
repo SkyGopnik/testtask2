@@ -1,8 +1,42 @@
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: 740px) { @content; }
+  }
+  @else if $media == tablet {
+    @media only screen and (max-width: 968px) { @content; }
+  }
+  @else if $media == notebook {
+    @media only screen and (max-width: 1240px) { @content; }
+  }
+}
+
+.container {
+  width: 1194px;
+
+  margin: 0 auto;
+
+  @include respond-to(notebook) {
+    width: 100%;
+  };
+}
+
 .header {
   box-shadow: 0 4px 44px rgba(0, 0, 0, 0.05);
 
   .header__inner {
     padding: 24px 0 14px 0;
+
+    @include respond-to(notebook) {
+      padding: 18px 44px 10px 44px;
+    }
+
+    @include respond-to(tablet) {
+      padding: 16px 32px 12px 32px;
+    }
+
+    @include respond-to(mobile) {
+      padding: 20px 20px 7px 20px;
+    }
 
     .info {
       display: grid;
@@ -10,8 +44,77 @@
       grid-template-rows: 35px;
       grid-column-gap: 9px;
 
+      position: relative;
+
+      @include respond-to(notebook) {
+        grid-template-columns: 175px 46px 156px auto 34px 118px;
+        grid-template-rows: 28px;
+        grid-column-gap: 7px;
+      }
+
+      @include respond-to(tablet) {
+        grid-template-columns: 128px 46px 156px auto 34px 118px;
+        grid-template-rows: 26px;
+      }
+
+      @include respond-to(mobile) {
+        grid-template-columns: 42px 40px 64px 64px 40px;
+        grid-template-rows: 36px;
+        justify-content: space-between;
+      }
+
+      .burger, .search__btn, .searchPlus__btn {
+        display: none;
+
+        @include respond-to(mobile) {
+          display: block;
+        }
+      }
+
+      .search__btn, .searchPlus__btn {
+        @include respond-to(mobile) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          border: none;
+          outline: none;
+          border-radius: 2px;
+
+          background: #F2F2F2;
+        }
+      }
+
+      .searchPlus__btn {
+        background: #B11E2F;
+
+        svg:nth-child(2) {
+          margin-left: 5px;
+        }
+      }
+
+      .logo {
+        width: 100%;
+        height: 100%;
+
+        @include respond-to(notebook) {
+          height: 90%;
+        }
+
+        @include respond-to(mobile) {
+          display: none;
+        }
+      }
+
       .box {
         text-align: center;
+
+        @include respond-to(notebook) {
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
 
       .extended__btn {
@@ -20,6 +123,28 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 16px;
+
+        @include respond-to(notebook) {
+          font-size: 10.9573px;
+          line-height: 13px;
+        }
+
+        @include respond-to(mobile) {
+          display: none;
+        }
+      }
+
+      .login__btn {
+        @include respond-to(notebook) {
+          img {
+            width: 20px;
+            height: 16px;
+          }
+        }
+
+        @include respond-to(mobile) {
+          display: none;
+        }
       }
 
       .extended__btn, .login__btn {
@@ -43,6 +168,10 @@
 
         display: flex;
 
+        @include respond-to(mobile) {
+          display: none;
+        }
+
         .search__inner {
           width: 100%;
           height: 100%;
@@ -64,6 +193,7 @@
             display: flex;
 
             background: url("/main/search.svg") no-repeat center left;
+            background-size: 100% 100%;
           }
 
           .search__input {
@@ -85,6 +215,18 @@
 
             &::placeholder {
               color: #333333;
+            }
+          }
+
+          @include respond-to(notebook) {
+            &:before {
+              width: 11px;
+              height: 9px;
+            }
+
+            .search__input {
+              font-size: 10.9573px;
+              line-height: 13px;
             }
           }
         }
@@ -114,7 +256,49 @@
           font-size: 13px;
           line-height: 14px;
 
+          white-space: nowrap;
+
           color: #333333;
+        }
+
+        @include respond-to(notebook) {
+          .count {
+            font-size: 17.7578px;
+            line-height: 10px;
+          }
+
+          .bottle {
+            width: 100%;
+            height: 100%;
+          }
+
+          .sum {
+            font-size: 10.1746px;
+            line-height: 11px;
+
+            color: #333333;
+          }
+        }
+
+        @include respond-to(mobile) {
+          height: 34px;
+
+          padding: 0 7px;
+
+          position: absolute;
+          right: -20px;
+
+          border-radius: 2px;
+
+          background-color: #FFF5EE;
+
+          .count {
+            margin-right: 10px;
+          }
+
+          .sum {
+            display: none;
+          }
         }
       }
     }
@@ -124,7 +308,31 @@
       margin-top: 24px;
 
       display: flex;
+      align-items: center;
       justify-content: space-between;
+
+      @include respond-to(notebook) {
+        padding: 8px 0;
+        margin-top: 18px;
+      }
+
+      @include respond-to(tablet) {
+        padding: 0;
+        margin-top: 16px;
+
+        justify-content: normal;
+        overflow-y: scroll;
+      }
+
+      .bottles {
+        display: none;
+
+        @include respond-to(tablet) {
+          display: block;
+
+          margin-right: 20px;
+        }
+      }
 
       .item {
         font-family: 'Montserrat', sans-serif;
@@ -134,9 +342,24 @@
         line-height: 16px;
         text-decoration: none;
 
+        white-space: nowrap;
         transition: .5s ease;
 
         color: #000000;
+
+        @include respond-to(notebook) {
+          font-size: 10.9573px;
+          line-height: 13px;
+        }
+
+        @include respond-to(tablet) {
+          font-size: 14px;
+          line-height: 16px;
+
+          &:not(:last-child) {
+            margin-right: 28px;
+          }
+        }
 
         &:hover {
           opacity: .5;
@@ -154,6 +377,18 @@
   .content__inner {
     padding: 40px 0;
 
+    @include respond-to(notebook) {
+      padding: 30px 44px;
+    }
+
+    @include respond-to(tablet) {
+      padding: 27px 32px;
+    }
+
+    @include respond-to(mobile) {
+      padding: 40px 20px;
+    }
+
     .titleWithPercent {
       display: flex;
       align-items: center;
@@ -166,12 +401,50 @@
         font-size: 30.6947px;
         line-height: 120%;
         text-transform: uppercase;
+
+        @include respond-to(notebook) {
+          font-size: 24.0236px;
+          line-height: 120%;
+        }
+
+        @include respond-to(tablet) {
+          font-size: 30.6947px;
+          line-height: 120%;
+        }
+      }
+
+      .percent {
+        @include respond-to(notebook) {
+          width: 100px;
+          height: 100px;
+        }
+
+        @include respond-to(tablet) {
+          width: 128px;
+          height: 128px;
+        }
       }
     }
 
     .breadCrumb {
       display: flex;
       align-items: center;
+
+      @include respond-to(tablet) {
+        margin-top: 16px;
+      }
+
+      .arrow {
+        @include respond-to(notebook) {
+          width: 32px;
+          height: 15px;
+        }
+
+        @include respond-to(tablet) {
+          width: 40px;
+          height: 19px;
+        }
+      }
 
       .item {
         margin: 10px;
@@ -184,6 +457,20 @@
         text-decoration: none;
 
         color: #BDBDBD;
+
+        @include respond-to(notebook) {
+          margin: 8px;
+
+          font-size: 10.9573px;
+          line-height: 13px;
+        }
+
+        @include respond-to(notebook) {
+          margin: 10px;
+
+          font-size: 14px;
+          line-height: 16px;
+        }
       }
     }
 
@@ -191,6 +478,15 @@
       margin: 24px 0;
 
       display: flex;
+      align-items: center;
+
+      @include respond-to(notebook) {
+        margin: 18px 0;
+      }
+
+      @include respond-to(mobile) {
+        justify-content: space-between;
+      }
 
       .title {
         width: 15%;
@@ -203,6 +499,22 @@
         text-decoration: none;
 
         color: #000000;
+
+        @include respond-to(notebook) {
+          width: 30%;
+
+          font-size: 14.0879px;
+          line-height: 19px;
+        }
+
+        @include respond-to(tablet) {
+          font-size: 18px;
+          line-height: 24px;
+        }
+
+        @include respond-to(mobile) {
+          width: 50%;
+        }
       }
 
       button {
@@ -257,6 +569,33 @@
             "photo perc ."
             "photo . .";
 
+        @include respond-to(notebook) {
+          margin: 12px 0;
+
+          grid-column-gap: 30px;
+        }
+
+        @include respond-to(tablet) {
+          grid-template-areas:
+            "title title title"
+            "photo desc desc"
+            "photo perc ."
+            "photo . .";
+        }
+
+        @include respond-to(mobile) {
+          grid-column-gap: 0;
+          grid-template-areas:
+            "photo photo photo"
+            "photo photo photo"
+            "title title perc"
+            "desc desc desc";
+
+          &:not(:last-child) {
+            margin-bottom: 80px;
+          }
+        }
+
         .photo {
           grid-area: photo;
 
@@ -264,6 +603,21 @@
           height: 414px;
 
           object-fit: cover;
+
+          @include respond-to(notebook) {
+            width: 322px;
+            height: 322px;
+          }
+
+          @include respond-to(tablet) {
+            width: 242px;
+            height: 242px;
+          }
+
+          @include respond-to(mobile) {
+            width: 100%;
+            height: 414px;
+          }
         }
 
         .title {
@@ -275,6 +629,25 @@
           font-size: 36px;
           line-height: 120%;
           text-transform: uppercase;
+
+          @include respond-to(notebook) {
+            font-size: 28.0821px;
+            line-height: 120%;
+          }
+
+          @include respond-to(tablet) {
+            margin-bottom: 16px;
+
+            font-size: 36px;
+            line-height: 120%;
+          }
+
+          @include respond-to(mobile) {
+            margin: 25px 0;
+
+            font-size: 24px;
+            line-height: 120%;
+          }
         }
 
         .description {
@@ -289,81 +662,222 @@
           line-height: 16px;
 
           color: #444444;
+
+          @include respond-to(notebook) {
+            margin: 30px 0;
+
+            font-size: 9.36069px;
+            line-height: 12px;
+          }
+
+          @include respond-to(tablet) {
+            margin: 0;
+
+            font-size: 12px;
+            line-height: 16px;
+          }
         }
 
         .percent {
           grid-area: perc;
+
+          @include respond-to(notebook) {
+            width: 38px;
+            height: 38px;
+          }
+
+          @include respond-to(tablet) {
+            width: 48px;
+            height: 48px;
+
+            margin-top: 16px;
+          }
+
+          @include respond-to(mobile) {
+            margin: 25px 0 25px auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+.showMore {
+  @include respond-to(notebook) {
+    padding: 0 44px;
+  }
+
+  @include respond-to(tablet) {
+    padding: 0 32px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 0 20px;
+  }
+
+  .showMore__inner {
+    margin: 40px 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: ". showMore contentUp";
+
+    @include respond-to(mobile) {
+      grid-template-areas:
+          ". showMore ."
+          ". . contentUp";
+      gap: 30px 0;
+    }
+
+    .showMore__btn {
+      grid-area: showMore;
+
+      width: 170px;
+      height: 44px;
+
+      margin: 0 auto;
+
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+
+      cursor: pointer;
+      transition: .5s ease;
+
+      border-radius: 22px;
+      border: none;
+      outline: none;
+
+      color: #ffffff;
+      background: #B11E2F;
+
+      @include respond-to(notebook) {
+        width: 133px;
+        height: 34px;
+
+        font-size: 14.0879px;
+        line-height: 19px;
+      }
+
+      @include respond-to(tablet) {
+        width: 170px;
+        height: 44px;
+
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      &:hover {
+        opacity: .5;
+      }
+    }
+
+    .contentUp__btn {
+      grid-area: contentUp;
+
+      margin-left: auto;
+
+      display: flex;
+      align-items: center;
+
+      cursor: pointer;
+      transition: .5s ease;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      &:hover {
+        opacity: .5;
+      }
+
+      img {
+        @include respond-to(notebook) {
+          width: 23px;
+          height: 26px;
+        }
+
+        @include respond-to(tablet) {
+          width: 30px;
+          height: 33px;
         }
       }
 
-      .footer {
-        margin-top: 52px;
+      span {
+        margin-right: 10px;
 
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: ". showMore contentUp";
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 24px;
+        text-transform: uppercase;
 
-        .showMore__btn {
-          grid-area: showMore;
+        @include respond-to(notebook) {
+          font-size: 14.0879px;
+          line-height: 19px;
+        }
 
-          width: 170px;
-          height: 44px;
-
-          margin: 0 auto;
-
-          font-family: 'Montserrat', sans-serif;
-          font-style: normal;
-          font-weight: 400;
+        @include respond-to(tablet) {
           font-size: 18px;
           line-height: 24px;
-
-          cursor: pointer;
-          transition: .5s ease;
-
-          border-radius: 22px;
-          border: none;
-          outline: none;
-
-          color: #ffffff;
-          background: #B11E2F;
-
-          &:hover {
-            opacity: .5;
-          }
-        }
-
-        .contentUp__btn {
-          grid-area: contentUp;
-
-          margin-left: auto;
-
-          display: flex;
-          align-items: center;
-
-          cursor: pointer;
-          transition: .5s ease;
-
-          border: none;
-          outline: none;
-
-          background: transparent;
-
-          &:hover {
-            opacity: .5;
-          }
-
-          span {
-            margin-right: 10px;
-
-            font-family: 'Montserrat', sans-serif;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 18px;
-            line-height: 24px;
-            text-transform: uppercase;
-          }
         }
       }
+    }
+  }
+}
+
+.footer {
+  margin-top: 100px;
+
+  display: none;
+
+  @include respond-to(tablet) {
+    display: block;
+  }
+
+  .list {
+    margin-bottom: 60px;
+    padding: 0 32px;
+
+    display: flex;
+    justify-content: space-between;
+
+    @include respond-to(mobile) {
+      padding: 0 20px;
+    }
+
+    .item {
+      padding: 6px;
+
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 8.18277px;
+      line-height: 9px;
+    }
+  }
+
+  .copyright {
+    padding: 13px 32px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 7.0138px;
+    line-height: 11px;
+
+    background: #F2F2F2;
+
+    @include respond-to(mobile) {
+      padding: 33px 20px;
+
+      font-size: 10px;
+      line-height: 18px;
     }
   }
 }

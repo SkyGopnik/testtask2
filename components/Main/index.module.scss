@@ -862,21 +862,8 @@
     margin-bottom: 60px;
     padding: 0 32px;
 
-    display: grid;
-    grid-template-columns: 120px 70px 42px 92px 64px 152px;
-    justify-content: space-between;
-    //grid-template-rows: repeat(2, 1fr);
-    //grid-template-areas: "item item item item item item";
-
     @include respond-to(mobile) {
-      padding: 0 20px;
       margin-bottom: 25px;
-
-      justify-content: normal;
-
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 0 40px;
     }
 
     .item {

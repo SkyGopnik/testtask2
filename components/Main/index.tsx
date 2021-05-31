@@ -106,13 +106,13 @@ export default function() {
       </div>
       <div className={style.footer}>
         <img className={style.logo} src="/main/logo.svg" alt="Логотип" />
-        <div className={style.list}>
-          <div className={style.item}>Условия использования</div>
-          <div className={style.item}>О компании</div>
-          <div className={style.item}>Статьи</div>
-          <div className={style.item}>Доставка и оплата</div>
-          <div className={style.item}>Карта сайта</div>
-          <div className={style.item}>Политика конфиденциальности</div>
+        <div className={`${style.list} row row-cols-2 row-cols-md-6`}>
+          <div className={`${style.item} col`}>Условия использования</div>
+          <div className={`${style.item} col`}>О компании</div>
+          <div className={`${style.item} col`}>Статьи</div>
+          <div className={`${style.item} col`}>Доставка и оплата</div>
+          <div className={`${style.item} col`}>Карта сайта</div>
+          <div className={`${style.item} col`}>Политика конфиденциальности</div>
         </div>
         <div className={style.copyright}><span className={style.additional}>Подробнее о политике конфиденциальности   —   </span>Все права защищены 2021 С</div>
       </div>

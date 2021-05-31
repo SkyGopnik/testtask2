@@ -105,6 +105,7 @@ export default function() {
         </div>
       </div>
       <div className={style.footer}>
+        <img className={style.logo} src="/main/logo.svg" alt="Логотип" />
         <div className={style.list}>
           <div className={style.item}>Условия использования</div>
           <div className={style.item}>О компании</div>
@@ -113,7 +114,7 @@ export default function() {
           <div className={style.item}>Карта сайта</div>
           <div className={style.item}>Политика конфиденциальности</div>
         </div>
-        <div className={style.copyright}>Подробнее о политике конфиденциальности   —   Все права защищены 2021 С</div>
+        <div className={style.copyright}><span className={style.additional}>Подробнее о политике конфиденциальности   —   </span>Все права защищены 2021 С</div>
       </div>
     </>
   );

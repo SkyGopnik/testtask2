@@ -840,25 +840,64 @@
     display: block;
   }
 
+  @include respond-to(mobile) {
+    margin-top: 80px;
+  }
+
+  .logo {
+    width: 165px;
+    height: 25px;
+
+    padding: 0 20px;
+    margin-bottom: 20px;
+
+    display: none;
+
+    @include respond-to(mobile) {
+      display: block;
+    }
+  }
+
   .list {
     margin-bottom: 60px;
     padding: 0 32px;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: 120px 70px 42px 92px 64px 152px;
     justify-content: space-between;
+    //grid-template-rows: repeat(2, 1fr);
+    //grid-template-areas: "item item item item item item";
 
     @include respond-to(mobile) {
       padding: 0 20px;
+      margin-bottom: 25px;
+
+      justify-content: normal;
+
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 0 40px;
     }
 
     .item {
       padding: 6px;
+
+      text-align: center;
 
       font-family: 'Montserrat', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 8.18277px;
       line-height: 9px;
+
+      @include respond-to(mobile) {
+        padding: 25px 0;
+
+        text-align: left;
+
+        font-size: 14px;
+        line-height: 16px;
+      }
     }
   }
 
@@ -872,6 +911,12 @@
     line-height: 11px;
 
     background: #F2F2F2;
+
+    .additional {
+      @include respond-to(mobile) {
+        display: none;
+      }
+    }
 
     @include respond-to(mobile) {
       padding: 33px 20px;
